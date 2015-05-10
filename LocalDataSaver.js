@@ -1,3 +1,7 @@
 $( function() { 
-	$( "#ProcessPageEdit" ).sisyphus();
+	$( "#ProcessPageEdit" ).sisyphus(
+		{
+			locationBased: true
+		}	
+	);
 });
