@@ -1,0 +1,45 @@
+<?php
+/**
+ * Local data saver (0.0.1)
+ * Save forms in the browser storage with Sisyphus.js to prevent them to get lost
+ * 
+ * @author diogo
+ * 
+ * ProcessWire 2.x
+ * Copyright (C) 2011 by Ryan Cramer
+ * Licensed under GNU/GPL v2, see LICENSE.TXT
+ * 
+ * http://www.processwire.com
+ * http://www.ryancramer.com
+ * 
+ */
+
+class LocalDataSaver extends WireData implements Module {
+
+	public static function getModuleInfo() {
+		return array(
+			'title' => "Local data saver",
+			'version' => "0.0.1",
+			'summary' => "Save forms in the browser storage with Sisyphus.js to prevent them to get lost",
+			
+			'author' => "diogo",
+			'href' => "",
+			
+			'autoload' => "admin",
+			'singular' => true
+			
+		);
+	}
+
+	public function init() {
+			$this->addHookAfter('ProcessPageEdit::buildForm', $this, 'callScripts');
+		
+
+	}
+	
+	public function callScripts(HookEvent $event) {
+		$this->config->scripts->add($this->config->urls->LocalDataSaver . "sisyphus.min.js");
+		$this->config->scripts->add($this->config->urls->LocalDataSaver . "LocalDataSaver.js");
+	}
+
+}
